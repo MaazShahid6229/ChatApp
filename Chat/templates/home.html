@@ -1,0 +1,21 @@
+{% extends "main.html"   %}
+
+{% block content %}
+<h1>
+    Home Page
+</h1>
+
+<div>
+    <a href="{%url 'create-room'%}">Create Room</a>
+    {% for room in rooms %}
+    <div>
+        <h2>
+            {{room.id}} -- <a href="{% url  'room' room.id %}">{{room.name}}</a>
+            <a href="{% url 'update-room' room.id %}">{Edit}</a>
+            <a href="{% url 'delete-room' room.id %}">{Del}</a>
+        </h2>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}
