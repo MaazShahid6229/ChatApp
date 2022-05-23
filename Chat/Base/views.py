@@ -1,16 +1,38 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic
 from .forms import RoomForm
 
-# rooms = [
-#     {"id": 1, "Name": "Maaz"},
-#     {"id": 2, "Name": "Ali"},
-#     {"id": 3, "Name": "Ahmed"},
-#     {"id": 4, "Name": "Subhan"},
-# ]
-
 
 # Create your views here.
+def loginUser(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+            return render(request, "login.html")
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(request, "Password Doesn't Match")
+
+    context = {}
+    return render(request, "login.html", context)
+
+
+def logoutuser(request):
+    logout(request)
+    return redirect("home")
+
+
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else  ""
     topic = Topic.objects.all()
