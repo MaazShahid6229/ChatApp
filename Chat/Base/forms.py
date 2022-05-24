@@ -5,4 +5,4 @@ from .models import Room
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = ["topic", "host", "name"]
+        fields = ["topic", "name", "description"]

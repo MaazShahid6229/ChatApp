@@ -5,22 +5,23 @@
     <title>ChatApp</title>
 </head>
 <body>
-
+<p>{{request.host}}</p>
+<a href="{% url 'home' %}">Home</a><t></t>
 {% if request.user.is_authenticated %}
-    <a href="{% url 'logoutuser' %}">Logout</a>
+<a href="{% url 'logoutuser' %}">Logout</a>
 {% else %}
-    <a href="{%url 'login'%}">Login</a>/<a href="{%url 'register'%}">Register</a>
+<a href="{%url 'login'%}">Login</a>/<a href="{%url 'register'%}">Register</a>
 {% endif %}
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <hr>
-     {% block content %}
-    {% endblock content %}
+{% block content %}
+{% endblock content %}
 
 </body>
 </html>

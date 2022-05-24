@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
-from django.http import  HttpResponse
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Room, Topic
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+
 from .forms import RoomForm
+from .models import Room, Topic, Message
 
 
 # Create your views here.
@@ -15,13 +16,14 @@ def loginUser(request):
     if request.user.is_authenticated:
         return HttpResponse(f"You are already Logged in with user {request.user}")
     if request.method == "POST":
-        username = request.POST.get("username")
+        username = request.POST.get("username").lower()
         password = request.POST.get("password")
         try:
             user = User.objects.get(username=username)
         except:
             messages.error(request, "User does not exist")
-            return render(request, "login.html")
+            context = {"page": page}
+            return render(request, "login.html", context)
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -65,24 +67,36 @@ def home(request):
 
 
 def room(request, pk):
+    if request.method == "POST":
+        message = Message.objects.create(
+            user=request.user,
+            room=Room.objects.get(id=pk),
+            body=request.POST.get("body")
+        )
+        redirect("room", pk)
     room = Room.objects.get(id=pk)
-    context = {"room": room}
+    room_messages = room.message_set.all()
+    participants = room.participants.all()
+    context = {"room": room, "room_messages": room_messages, "participants": participants}
     return render(request, "room.html", context)
 
 
-@login_required(login_url= "login")
+@login_required(login_url="login")
 def create_room(request):
     form = RoomForm()
     if request.method == "POST":
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room1 = form.save(commit=False)
+            print(room1.host)
+            room1.host = request.user
+            room1.save()
             return redirect("home")
     context = {"form": form}
     return render(request, "room_form.html", context)
 
 
-@login_required(login_url= "login")
+@login_required(login_url="login")
 def update_room(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
@@ -95,7 +109,7 @@ def update_room(request, pk):
     return render(request, "room_form.html", context)
 
 
-@login_required(login_url= "login")
+@login_required(login_url="login")
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
@@ -104,3 +118,16 @@ def delete_room(request, pk):
         return redirect("home")
     context = {"room": room}
     return render(request, "delete_form.html", context)
+
+
+@login_required(login_url="login")
+def delete_message(request, pk):
+    message = Message.objects.get(id=pk)
+    if request.user != message.user:
+        return HttpResponse("You are not allowed to delete this Message")
+
+    if request.method == "POST":
+        message.delete()
+        return redirect("home")
+    context = {"obj": message}
+    return render(request, "delet_message.html", context)
