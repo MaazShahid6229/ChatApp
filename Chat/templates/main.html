@@ -6,7 +6,8 @@
 </head>
 <body>
 <p>{{request.host}}</p>
-<a href="{% url 'home' %}">Home</a><t></t>
+<a href="{% url 'home' %}">Home</a>
+<t></t>
 {% if request.user.is_authenticated %}
 <a href="{% url 'logoutuser' %}">Logout</a>
 {% else %}

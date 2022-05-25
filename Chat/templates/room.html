@@ -7,6 +7,7 @@
         display: grid;
         grid-template-columns: 3fr 1fr;
     }
+
 </style>
 
 <div class="room-container">
@@ -37,9 +38,9 @@
 
         {% if request.user.is_authenticated %}
         <div class="comment-form">
-            <form method="POST" action="">
+            <form action="" method="POST">
                 {% csrf_token %}
-                <input type="text" name="body" placeholder="Write you message here..." />
+                <input name="body" placeholder="Write you message here..." type="text"/>
             </form>
         </div>
         {% endif %}

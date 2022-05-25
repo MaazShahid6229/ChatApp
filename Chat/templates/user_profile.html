@@ -1,4 +1,4 @@
-{% extends "main.html"   %}
+{% extends "main.html" %}
 
 {% block content %}
 
@@ -9,6 +9,8 @@
     }
 
 
+
+
 </style>
 <div class="home-container">
     <div>
@@ -16,7 +18,8 @@
     </div>
     <div>
         <h3>
-            Total Rooms <b>{{room_count}}</b>
+            <h1>{{user.username}}</h1>
+
         </h3>
         {% include "activity_feeds.html"%}
     </div>
