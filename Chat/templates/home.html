@@ -9,7 +9,6 @@
     }
 
 
-
 </style>
 
 
@@ -23,6 +22,7 @@
 
     <div>
         <h3>Browse Topic</h3>
+        <hr>
         <div>
             <a href="{% url 'home' %}">
                 All
@@ -56,6 +56,20 @@
         </div>
         {% endfor %}
 
+    </div>
+    <div>
+        <h2>Recent Activity</h2>
+        <hr>
+        {% for message in room_messages %}
+        <div>
+            <small>@{{message.user}} {{message.created | timesince }}</small>
+            <p>{{message}}</p>
+            {% if request.user == message.user %}
+            <a href="{% url 'delete_message' message.id %}">Delete</a>
+            {% endif %}
+            <hr>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}
