@@ -4,6 +4,7 @@
     <list default="true" id="04c19f70-3f12-47f7-acf4-238a206c2ed9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/templates/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/templates/room_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/room_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
