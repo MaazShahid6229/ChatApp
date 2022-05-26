@@ -2,30 +2,22 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ChatApp</title>
-    <link href="{% static 'styles/main.css' %}" media="screen" rel='stylesheet' type="text/css"/>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="assets/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet"/>
+    <title>StudyBuddy - Find study partners around the world!</title>
 </head>
 
 <body>
-<p>{{request.host}}</p>
-<a href="{% url 'home' %}">Home</a>
-<t></t>
-{% if request.user.is_authenticated %}
-<a href="{% url 'logoutuser' %}">Logout</a>
-{% else %}
-<a href="{%url 'login'%}">Login</a>/<a href="{%url 'register'%}">Register</a>
-{% endif %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-<hr>
+{% include "navbar.html "%}
 {% block content %}
 {% endblock content %}
-
+<script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+
+
+
+
