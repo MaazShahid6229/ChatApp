@@ -14,10 +14,11 @@ from .models import Room, Topic, Message
 def loginUser(request):
     page = "login"
     if request.user.is_authenticated:
-        return HttpResponse(f"You are already Logged in with user {request.user}")
+        return redirect("home")
     if request.method == "POST":
         username = request.POST.get("username").lower()
         password = request.POST.get("password")
+        print(username)
         try:
             user = User.objects.get(username=username)
         except:
@@ -52,6 +53,7 @@ def register(request):
             return redirect("home")
         else:
             messages.error(request, "User Can't be created")
+            print("error")
     form = UserCreationForm()
     context = {"form": form}
     return render(request, "login.html", context)

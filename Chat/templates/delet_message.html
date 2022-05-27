@@ -19,8 +19,8 @@
                 </div>
             </div>
             <div class="layout__body">
-                <form action="" method="POST" class="form">
-                     {% csrf_token %}
+                <form action="" class="form" method="POST">
+                    {% csrf_token %}
                     <div class="form__group">
                         <p>Are you sure you want to delete {{obj.name}}?</p>
                     </div>
