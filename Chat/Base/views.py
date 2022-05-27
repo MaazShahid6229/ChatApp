@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 from .models import Room, Topic, Message
 
 
@@ -88,16 +88,20 @@ def room(request, pk):
 @login_required(login_url="login")
 def create_room(request):
     form = RoomForm()
+
     if request.method == "POST":
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            room1 = form.save(commit=False)
-            room1.host = request.user
-            room1.save()
-            room1.participants.add(request.user)
-            room1.save()
-            return redirect("home")
-    context = {"form": form}
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        Room.objects.create(
+            host=request.user,
+            topic=topic,
+            name=request.POST.get('name'),
+            description=request.POST.get('description'),
+        )
+        return redirect('home')
+
+    topics = Topic.objects.all()
+    context = {"form": form, "topics": topics}
     return render(request, "room_form.html", context)
 
 
@@ -145,3 +149,15 @@ def userProfile(request, pk):
     room_messages = user.message_set.all()
     context = {"user": user, "topic": topic, "rooms": rooms, "room_messages": room_messages}
     return render(request, "user_profile.html", context)
+
+
+def update_user(request, pk):
+    user = request.user
+    form = UserForm(instance=user)
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_profile', pk=request.user.id)
+    context = {"form": form}
+    return render(request, "update_user.html", context)

@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="04c19f70-3f12-47f7-acf4-238a206c2ed9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/templates/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Base/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Base/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Base/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Base/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Base/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Base/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/templates/delet_message.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/delet_message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/templates/delete_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/delete_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/templates/room_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/room_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/templates/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/user_profile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,15 +39,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Practice/Django",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Practice/Django&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Practice\Django\Chat\Base" />

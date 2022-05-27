@@ -1,12 +1,13 @@
 {% extends "main.html"   %}
 
 {% block content %}
-<main class="delete-item layout">
+
+<main class="update-account layout">
     <div class="container">
         <div class="layout__box">
             <div class="layout__boxHeader">
                 <div class="layout__boxTitle">
-                    <a href="{{request.META.HTTP_REFERER}}">
+                    <a href="{%url 'user_profile' request.user.id %}">
                         <svg height="32" version="1.1" viewBox="0 0 32 32" width="32"
                              xmlns="http://www.w3.org/2000/svg">
                             <title>arrow-left</title>
@@ -15,23 +16,27 @@
                             </path>
                         </svg>
                     </a>
-                    <h3>Back</h3>
+                    <h3>Edit your profile</h3>
                 </div>
             </div>
             <div class="layout__body">
-                <form action="" method="POST" class="form">
-                     {% csrf_token %}
+                <form action="{%url 'update_user' request.user.id %}" class="form" method="POST">
+                    {% csrf_token %}
+                    {%for field in form%}
                     <div class="form__group">
-                        <p>Are you sure you want to delete {{obj.name}}?</p>
+                        <label for="username">{{field.label}}</label>
+                        {{field}}
                     </div>
-
-                    <div class="for__group">
-                        <input class="btn btn--main" type="submit" value="Confirm"/>
+                    {% endfor %}
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="{%url 'user_profile' request.user.id %}">Cancel</a>
+                        <button class="btn btn--main" type="submit">Update</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
+    </div>
 </main>
+
 {% endblock content %}
