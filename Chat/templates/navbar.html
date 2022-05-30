@@ -13,7 +13,7 @@
             <div class="header__user">
                 <a href="{% url  'user_profile' request.user.id %}">
                     <div class="avatar avatar--medium active">
-                        <img src="https://randomuser.me/api/portraits/men/37.jpg"/>
+                        <img src="{{request.user.avatar.url}}"/>
                     </div>
                     <p>{{request.user}}<span>@{{request.user}}</span></p>
                 </a>
@@ -24,17 +24,9 @@
                     </svg>
                 </button>
             </div>
-            {% else %}
-            <!-- Not Logged In -->
-            <a href="{% url 'login' %}">
-                <img src="{% static 'assets/avatar.svg'%}"/>
-                <p>Login</p>
-            </a>
-            {% endif %}
-
 
             <div class="dropdown-menu">
-                <a class="dropdown-link" href="settings.html"
+                <a class="dropdown-link" href="{%url 'update_user' user.id %}"
                 >
                     <svg height="32" version="1.1" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
                         <title>tools</title>
@@ -58,6 +50,13 @@
                     Logout</a
                 >
             </div>
+                        {% else %}
+            <!-- Not Logged In -->
+            <a href="{% url 'login' %}">
+                <img src="{% static 'assets/avatar.svg'%}"/>
+                <p>Login</p>
+            </a>
+            {% endif %}
         </nav>
     </div>
 </header>
