@@ -35,7 +35,7 @@ def loginUser(request):
     context = {"page": page}
     return render(request, "login.html", context)
 
-
+@login_required(login_url="login")
 def logoutuser(request):
     logout(request)
     return redirect("home")
